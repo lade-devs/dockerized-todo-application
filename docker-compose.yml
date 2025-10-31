@@ -29,8 +29,13 @@ services:
     command: >
       sh -c "
         chmod +x ./wait-for-it.sh &&
-        ./wait-for-it.sh mysql:3306 --timeout=30 --strict -- php artisan migrate --force &&
-        php artisan serve --host=0.0.0.0 --port=9000
+        ./wait-for-it.sh mysql:3306 --timeout=30 --strict -- sh -c '
+          if [ ! -f .env ] || ! php artisan key:generate --show >/dev/null 2>&1; then
+            php artisan key:generate
+          fi &&
+          php artisan migrate --force &&
+          php artisan serve --host=0.0.0.0 --port=9000
+        '
       "
     networks:
       - todo-network
