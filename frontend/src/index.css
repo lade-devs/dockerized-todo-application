@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f3f3f3;
+  --foreground: #100B00;
+  --primary: #0353A4;
+  --secondary: #3AAED8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-primary_text: var(--primary_text);
+  --font-sans: var(--font-inter-sans);
+  --font-mono: var(--font-inter-mono);
+  --shadow-card: 0 4px 20px -2px hsl(210 85% 45% / 0.1);
+  --card: 0 0% 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #110c04;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, inter;
+}
+
+@utility themeTextMuted {
+  @apply text-[16px] font-[400] text-[#12131380] dark:text-secondary
+}
+
+@utility themeRounded {
+  @apply rounded-full
+}
+
+@utility pryBtn {
+  @apply bg-primary font-semibold border-0 input justify-center px-5 text-[14px] hover:bg-secondary hover:text-white text-white space-x-2 cursor-pointer
+}
+@utility input {
+  @apply w-full bg-white border-primary border placeholder:themeTextMuted themeRounded h-[45px] px-5 relative flex items-center dark:placeholder:text-black dark:text-black
+}

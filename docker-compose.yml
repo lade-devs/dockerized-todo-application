@@ -1,0 +1,57 @@
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todo
+      MYSQL_USER: todo_user
+      MYSQL_PASSWORD: secret
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3309:3306"
+    networks:
+      - todo-network
+
+  backend:
+    build: ./backend
+    container_name: todo-backend
+    working_dir: /var/www
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/var/www
+    depends_on:
+      - mysql
+    ports:
+      - "9000:9000"
+    command: >
+      sh -c "
+        chmod +x ./wait-for-it.sh &&
+        ./wait-for-it.sh mysql:3306 --timeout=30 --strict -- php artisan migrate --force &&
+        php artisan serve --host=0.0.0.0 --port=9000
+      "
+    networks:
+      - todo-network
+
+  frontend:
+    build: ./frontend
+    container_name: todo-frontend
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5172:5172"
+    environment:
+      - VITE_API_BASE=http://backend:9000/api/v1
+    depends_on:
+      - backend
+    networks:
+      - todo-network
+
+volumes:
+  dbdata:
+
+networks:
+  todo-network:
+    driver: bridge

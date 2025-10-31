@@ -1,0 +1,690 @@
+{
+	"info": {
+		"_postman_id": "148938bb-a9c2-4b90-9189-977b27fb3990",
+		"name": "Cornfield Todo Api Documentation",
+		"description": "This documentation contains the endpoints to handle todo actions.\n\n**Actions**\n\n- Add new todos to the list\n    \n- Toggle todos as active or completed\n    \n- Delete todos from the list\n    \n- Filter by all/active/complete todos\n    \n- Clear all completed todos\n    \n- Reorder items on the list\n    \n\n**Status Code:**\n\n| **Code** | **Message** |\n| --- | --- |\n| 200 | Successful request |\n| 422 | Validation error |\n| 404 | Not found |\n| 400 | Failed request |\n\n**Sample of response:**\n\nSuccess response\n\n``` json\n{\n    \"status\": \"200\",\n    \"data\": { ... },\n    \"message\": \"Request processed successfully\"\n}\n\n ```\n\nError response:\n\n``` json\n  \"status\": \"422\",\n  \"errors\": { ... },\n  \"message\": \"Validation failed\"\n}\n\n ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46573879"
+	},
+	"item": [
+		{
+			"name": "List Todo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/todo",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"todo"
+					],
+					"query": [
+						{
+							"key": "filter_by",
+							"value": "completed",
+							"description": "all | active | completed",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Get all todo list items and also filter todo status. Use `filter_by` to filter todo status.\n\nFilters include, `all,` `active`, `completed`"
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/todo",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todo"
+							],
+							"query": [
+								{
+									"key": "filter_by",
+									"value": "all",
+									"description": "pending | ongoing | completed",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:9000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Oct 2025 12:30:34 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"200\",\n    \"data\": {\n        \"total\": 1,\n        \"total_active\": 0,\n        \"total_completed\": 1,\n        \"todos\": [\n            {\n                \"uuid\": \"52a5d424-7352-4f80-8f5b-fd6ee3917db7\",\n                \"title\": \"New Backend task\",\n                \"position\": 1,\n                \"description\": null,\n                \"status\": \"completed\",\n                \"started_at\": null,\n                \"completed_at\": \"2025-10-31 08:02:22\",\n                \"created_at\": \"2025-10-30T12:24:11.000000Z\"\n            }\n        ]\n    },\n    \"message\": \"Request processed successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Todo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"New Devops task\",\n    \"uuid\": \"{{UUID}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/todo/update",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"todo",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Todo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"New Devops task\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/todo",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"todo"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New Devops task\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/todo",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todo"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:9000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Oct 2025 12:24:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"200\",\n    \"data\": {\n        \"uuid\": \"f21a3e07-c62e-49f2-8653-2e2f789d61af\",\n        \"title\": \"New Devops task\",\n        \"position\": 1,\n        \"description\": null,\n        \"status\": \"pending\",\n        \"started_at\": null,\n        \"completed_at\": null,\n        \"created_at\": \"2025-10-30T12:24:26.000000Z\"\n    },\n    \"message\": \"Request processed successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Single Todo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/todo/{{UUID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"todo",
+						"{{UUID}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/todo/{{UUID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todo",
+								"{{UUID}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:9000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Oct 2025 12:40:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"200\",\n    \"data\": {\n        \"uuid\": \"f21a3e07-c62e-49f2-8653-2e2f789d61af\",\n        \"title\": \"New Devops task\",\n        \"position\": 1,\n        \"description\": null,\n        \"status\": \"pending\",\n        \"started_at\": null,\n        \"completed_at\": null,\n        \"created_at\": \"2025-10-30T12:24:26.000000Z\"\n    },\n    \"message\": \"Request processed successfully\"\n}"
+				},
+				{
+					"name": "404 response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/todo/{{UUID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todo",
+								"{{UUID}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:9000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Oct 2025 12:39:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"302\",\n    \"data\": null,\n    \"message\": \"Does not exists\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Todo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/todo/{{UUID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"todo",
+						"{{UUID}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/todo/{{UUID}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todo",
+								"{{UUID}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:9000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Oct 2025 12:55:15 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"uuid\": \"52a5d424-7352-4f80-8f5b-fd6ee3917db7\",\n            \"title\": \"New Backend task\",\n            \"position\": 1,\n            \"description\": null,\n            \"status\": \"pending\",\n            \"started_at\": null,\n            \"completed_at\": null,\n            \"created_at\": \"2025-10-30T12:24:11.000000Z\"\n        }\n    ],\n    \"message\": \"Request processed successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Todo Toggle Completed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/todo/{{UUID}}/toggleCompleted",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"todo",
+						"{{UUID}}",
+						"toggleCompleted"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/todo/{{UUID}}/markAsCompleted",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todo",
+								"{{UUID}}",
+								"markAsCompleted"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:9000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Oct 2025 12:26:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"200\",\n    \"data\": {\n        \"uuid\": \"9f746cb6-192a-48c5-bb3a-121df96bded3\",\n        \"title\": \"New UI task\",\n        \"position\": 1,\n        \"description\": null,\n        \"status\": \"completed\",\n        \"started_at\": \"2025-10-30 12:25:49\",\n        \"completed_at\": \"2025-10-30 12:26:54\",\n        \"created_at\": \"2025-10-30T12:04:36.000000Z\"\n    },\n    \"message\": \"Request processed successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Reorder Todo Position",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"current_position\": 4,\n    \"new_position\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/todo/reorderPosition",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"todo",
+						"reorderPosition"
+					]
+				},
+				"description": "Swaps the position of todos in the list, allowing you to reorder them. This helps in drag and drop."
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"current_position\": 4,\n    \"new_position\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/todo/reorderPosition",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todo",
+								"reorderPosition"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:9000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Oct 2025 12:24:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"uuid\": \"9f746cb6-192a-48c5-bb3a-121df96bded3\",\n            \"title\": \"New UI task\",\n            \"position\": 1,\n            \"description\": null,\n            \"status\": \"pending\",\n            \"started_at\": null,\n            \"completed_at\": null,\n            \"created_at\": \"2025-10-30T12:04:36.000000Z\"\n        },\n        {\n            \"uuid\": \"f21a3e07-c62e-49f2-8653-2e2f789d61af\",\n            \"title\": \"New Devops task\",\n            \"position\": 2,\n            \"description\": null,\n            \"status\": \"pending\",\n            \"started_at\": null,\n            \"completed_at\": null,\n            \"created_at\": \"2025-10-30T12:24:26.000000Z\"\n        },\n        {\n            \"uuid\": \"81e4b9f7-4e71-42da-9da0-65d8fc3c2a1c\",\n            \"title\": \"New Frontend task\",\n            \"position\": 3,\n            \"description\": null,\n            \"status\": \"pending\",\n            \"started_at\": null,\n            \"completed_at\": null,\n            \"created_at\": \"2025-10-30T12:24:21.000000Z\"\n        },\n        {\n            \"uuid\": \"52a5d424-7352-4f80-8f5b-fd6ee3917db7\",\n            \"title\": \"New Backend task\",\n            \"position\": 4,\n            \"description\": null,\n            \"status\": \"pending\",\n            \"started_at\": null,\n            \"completed_at\": null,\n            \"created_at\": \"2025-10-30T12:24:11.000000Z\"\n        }\n    ],\n    \"message\": \"Request processed successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Clear all Completed Todos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/todo/clearCompleted",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"todo",
+						"clearCompleted"
+					]
+				},
+				"description": "Removes all todos marked as **completed** and realigns the remaining todo positions."
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/todo/clearCompleted",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"todo",
+								"clearCompleted"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:9000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.4.14"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Oct 2025 12:41:53 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"200\",\n    \"data\": [\n        {\n            \"uuid\": \"f21a3e07-c62e-49f2-8653-2e2f789d61af\",\n            \"title\": \"New Devops task\",\n            \"position\": 1,\n            \"description\": null,\n            \"status\": \"pending\",\n            \"started_at\": null,\n            \"completed_at\": null,\n            \"created_at\": \"2025-10-30T12:24:26.000000Z\"\n        },\n        {\n            \"uuid\": \"52a5d424-7352-4f80-8f5b-fd6ee3917db7\",\n            \"title\": \"New Backend task\",\n            \"position\": 2,\n            \"description\": null,\n            \"status\": \"pending\",\n            \"started_at\": null,\n            \"completed_at\": null,\n            \"created_at\": \"2025-10-30T12:24:11.000000Z\"\n        }\n    ],\n    \"message\": \"Request processed successfully\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": ""
+		},
+		{
+			"key": "UUID",
+			"value": ""
+		}
+	]
+}
