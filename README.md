@@ -1,4 +1,4 @@
-# Cornfield Todo Application
+# Dockerized Todo Application
 
 A fully dockerized **Todo application** built with a **Laravel backend** and **React frontend**, featuring task creation, completion tracking, filtering, and drag-and-drop reordering.
 
